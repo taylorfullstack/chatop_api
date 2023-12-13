@@ -1,0 +1,135 @@
+openapi: 3.0.0
+info:
+  title: Chatop Mockoon API
+  version: 1.0.0
+  description: "Defines a comprehensive API for ChâTop"
+paths:
+  /api/auth/register:
+    post:
+      responses:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example: '{}'
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "token": "jwt" }'
+  /api/auth/login:
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "token": "jwt" }'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{ "message": "error" }'
+  /api/messages:
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "message": "Message sent successfully" }'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{ "message": "error" }'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example: '{}'
+  /api/auth/me:
+    get:
+      responses:
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{}'
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{}'
+  /api/rentals:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "rentals": [ { "id": 1, "name": "beach cottage", "surface": 432, "price": 300, "picture": "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg", "description": "Description of the rental property.", "owner_id": 1, "created_at": "2012/12/02", "updated_at": "2014/12/02" }, { "id": 1, "name": "test house 2", "surface": 154, "price": 200, "picture": "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg", "description": "Lltricies. N", "owner_id": 2, "created_at": "2012/12/02", "updated_at": "2014/12/02" }, { "id": 3, "name": "test house 3", "surface": 234, "price": 100, "picture": "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg", "description": "Description of another rental property." } ] }'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{ "message": "error" }'
+  '/api/rentals/{id}':
+    get:
+      parameters:
+        - name: id
+          in: path
+          description: ID of the rental to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "id": 1, "name": "dream house", "surface": 24, "price": 30, "picture": "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg", "description": "A description of a rental", "owner_id": 1, "created_at": "2012/12/02", "updated_at": "2014/12/02" }'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{ "message": "error" }'
+    put:
+      parameters:
+        - name: id
+          in: path
+          description: ID of the rental to update
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "message": "Rental updated !" }'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{ "message": "error" }'
+  '/api/user/{id}':
+    get:
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: '{ "id": 1, "name": "John Doe", "email": "john@example.com", "created_at": "2012/12/02", "updated_at": "2012/12/02" }'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: '{ "message": "error" }'
