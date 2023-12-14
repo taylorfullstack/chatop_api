@@ -42,11 +42,10 @@ CREATE UNIQUE INDEX users_index ON users (email);
 
 
 INSERT INTO users (name, email, password) VALUES
-('Test User', 'test@test.com', SHA2('password', 256)),
-('Heather Taylor', 'heather@test.com', SHA2('password', 256));
+('Test User', 'test@test.com', 'test!31');
 
 INSERT INTO rentals (name, surface, price, picture, description, owner_id) VALUES
 ('Lakefront Cottage', 100, 150, 'https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_1280.jpg', 'Quiet cottage in the mountains', 1),
-('Beach House', 200, 250, 'https://cdn.pixabay.com/photo/2020/10/13/13/28/ameland-5651866_1280.jpg', 'Beautiful beach house', 2),
-('Snowy Cabin', 100, 399,  'https://cdn.pixabay.com/photo/2016/11/19/14/30/aurora-borealis-1839582_1280.jpg', 'Gorgeous view of the aurora borealis', 2);
+('Beach House', 200, 250, 'https://cdn.pixabay.com/photo/2020/10/13/13/28/ameland-5651866_1280.jpg', 'Beautiful beach house', 1),
+('Snowy Cabin', 100, 399,  'https://cdn.pixabay.com/photo/2016/11/19/14/30/aurora-borealis-1839582_1280.jpg', 'Gorgeous view of the aurora borealis', 1);
 
