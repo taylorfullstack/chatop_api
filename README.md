@@ -50,6 +50,7 @@ Important Note: Replace `mysql_username` with your actual MySQL username.
   
   jwt.key=${JWT_KEY} #a secure, random string (UUID recommended)
   client.url=${CLIENT_URL} #example: http://localhost:4200
+  springdoc.swagger-ui.oauth.clientSecret=${JWT_KEY} #the same secure, random string (UUID recommended) used for jwt.key
   ```
 
 ### 5. Build the project and install its dependencies:
@@ -74,9 +75,18 @@ After launching the application locally, the Swagger documentation can be found 
 
 Note: Be sure to replace `3001` with your server port in the URL.
 
+From here, you can access all routes that do not require authentication.
+
+To access authenticated routes:
+- Either login with the test user or register a new user and login. 
+- Copy the returned jwt token, click the authorize button, paste the token into the form in the modal and click authorize. 
+- You will now be able to access authenticated routes as this user until you click the authorize button again and then click logout.
+
+Note: The test user's email and password are located in the [chatop.sql script](https://github.com/taylorfullstack/chatop_api/blob/master/chatop.sql) as well as in the Postman collection.
+
 ## Try it out!
 
-To try out the application, you may use the front end Angular application, Postman, or both!
+To try out the application routes, you may use the Swagger UI as described above, the front end Angular application, Postman, or all three!
 
-- Install the corresponding [front end Angular application here](https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant-Java-et-Spring)
+- Install the corresponding [front end Angular application here](https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant-Java-et-Spring) and login with the test user.
 - Import the [Postman Collection](https://github.com/taylorfullstack/chatop_api/blob/master/ChaTop.postman_collection.json) into Postman. Follow the instructions in the description to set up your jwt token variable.
