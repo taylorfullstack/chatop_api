@@ -32,13 +32,13 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    public UserDTO registerNewUser(RegisterDTO registerDTO) {
+    public void registerNewUser(RegisterDTO registerDTO) {
         User user = new User();
         user.setEmail(registerDTO.getEmail());
         user.setName(registerDTO.getName());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         User savedUser = userRepository.save(user);
-        return modelMapper.map(savedUser, UserDTO.class);
+        modelMapper.map(savedUser, UserDTO.class);
     }
 
     public Authentication authenticate(LoginDTO loginDTO) {
@@ -49,7 +49,10 @@ public class UserService {
     }
 
     public UserDTO getCurrentUser(Authentication authentication) {
-        User user = userRepository.findByEmail(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findAll().stream()
+                .filter(u -> u.getEmail().equals(authentication.getName()))
+                .findFirst()
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setEmail(user.getEmail());

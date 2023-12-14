@@ -20,7 +20,6 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Data
 @Service
@@ -50,7 +49,7 @@ public class RentalService {
     }
 
    public Map<String, List<RentalDTO>> getRentals() {
-       List<Rental> rentals = (List<Rental>) rentalRepository.findAll();
+       List<Rental> rentals = rentalRepository.findAll();
        List<RentalDTO> rentalDTOs = rentals.stream()
                .map(rental -> {
                    RentalDTO rentalDTO = modelMapper.map(rental, RentalDTO.class);
@@ -58,21 +57,23 @@ public class RentalService {
                    rentalDTO.setPicture(rental.getPicture());
                    return rentalDTO;
                })
-               .collect(Collectors.toList());
+               .toList();
        return Collections.singletonMap("rentals", rentalDTOs);
    }
 
 
-    public RentalDTO createRental(RentalRequestDTO rentalRequestDTO, Principal principal) {
+    public void createRental(RentalRequestDTO rentalRequestDTO, Principal principal) {
         try {
             String email = principal.getName();
-            User owner = userRepository.findByEmail(email)
+            User owner = userRepository.findAll().stream()
+                    .filter(user -> user.getEmail().equals(email))
+                    .findFirst()
                     .orElseThrow(() -> new NoSuchElementException("User not found with email : " + email));
             rentalRequestDTO.setOwner_id(owner.getId());
 
             // Save the image file
             MultipartFile picture = rentalRequestDTO.getPicture();
-            String fileName = StringUtils.cleanPath(picture.getOriginalFilename());
+            String fileName = StringUtils.cleanPath(Objects.requireNonNull(picture.getOriginalFilename()));
             Path path = Paths.get("src/main/resources/static/images/" + fileName);
             Files.copy(picture.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -96,7 +97,6 @@ public class RentalService {
             RentalDTO savedRentalDTO = modelMapper.map(savedRental, RentalDTO.class);
             savedRentalDTO.setOwner_id(savedRental.getOwner().getId());
             savedRentalDTO.setId(savedRental.getId()); // Set the id in the RentalDTO
-            return savedRentalDTO;
         } catch (Exception e) {
             throw new RuntimeException("Error while creating rental: " + e.getMessage());
         }
