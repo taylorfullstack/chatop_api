@@ -32,13 +32,13 @@ public class SpringSecurityConfig {
     @Value("${jwt.key}")
     private String jwtKey;
 
-    @Value("${client.port}")
-    private String clientPort;
+    @Value("${client.url}")
+    private String clientUrl;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList(clientPort));
+        configuration.setAllowedOrigins(Collections.singletonList(clientUrl));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
