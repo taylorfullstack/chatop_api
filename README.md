@@ -68,12 +68,15 @@ Once the server is running locally, you can access the API endpoints at http://l
 
 Note: Be sure to replace `3001` with your server port in the URL.
 
-## Documentation
+## Swagger Documentation
 
 After launching the application locally, the Swagger documentation can be found at http://localhost:3001/swagger-ui/index.html
 
 Note: Be sure to replace `3001` with your server port in the URL.
 
-## Front end application
+## Try it out!
 
-You may find and install the corresponding [front end application here](https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant-Java-et-Spring)
+To try out the application, you may use the front end Angular application, Postman, or both!
+
+- Install the corresponding [front end Angular application here](https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant-Java-et-Spring)
+- Import the [Postman Collection](https://github.com/taylorfullstack/chatop_api/blob/master/ChaTop.postman_collection.json) into Postman. Follow the instructions in the description to set up your jwt token variable.
