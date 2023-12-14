@@ -5,10 +5,10 @@ ChaTop API is a Spring Boot application that provides a RESTful API for managing
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:  
+Before you begin, ensure you have met the following requirements:
 - You have installed the latest version of Java and Maven.
 - You have a MySQL server running. If not, you can download it from here.
-  
+
 ## Installation and launch
 To install the application locally
 
@@ -27,7 +27,7 @@ cd chatop_api
 3. Create a new database in your MySQL server:
 
 ```bash
-mysql -u your_mysql_username -p -e "CREATE DATABASE IF NOT EXISTS chatop_db;"
+mysql -u your_mysql_username -p < chatop.sql
 ```
 
 Note: Replace your_mysql_username with your actual MySQL username.
