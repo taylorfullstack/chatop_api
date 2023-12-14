@@ -2,9 +2,7 @@ package com.chatop.api.controller;
 
 import com.chatop.api.dto.RentalDTO;
 import com.chatop.api.dto.RentalRequestDTO;
-import com.chatop.api.repository.UserRepository;
 import com.chatop.api.service.RentalService;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +16,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/rentals")
 public class RentalController {
-    private UserRepository userRepository;
-    private RentalService rentalService;
-    private ModelMapper modelMapper;
+    private final RentalService rentalService;
 
-    public RentalController(UserRepository userRepository, RentalService rentalService, ModelMapper modelMapper) {
-        this.userRepository = userRepository;
+    public RentalController(RentalService rentalService) {
         this.rentalService = rentalService;
-        this.modelMapper = modelMapper;
     }
 
     @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
